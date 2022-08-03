@@ -790,11 +790,11 @@
 				})
 				//查询质押CFX/FC LP 数量
 				chaxuncoin.requrieBanlance("0x831478f6e85d3481f123853065bc26660c699d81").call({from:accounts[0]}).then(function(response){
-					$("#dcflBanlance").html(0.00);
+					$("#dcflBanlance").html(toDecimal2(response/10**18));
 				})
 				//查询DCFX持币数量
 				chaxuncoin.requrieBanlance("0x84E1e1b5B70ABA6500C4e96F11Cc78B84bB684f8").call({from:accounts[0]}).then(function(response){
-					$("#dcfxBanlance").html(toDecimal2(response/10**18));
+					$("#dcfxBanlance").html(0.00);
 					var a = response/10**18;
 					
 					cfxpos.yesterdaybili().call({from:accounts[0]}).then(function(re){
