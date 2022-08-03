@@ -794,7 +794,7 @@
 				})
 				//查询DCFX持币数量
 				chaxuncoin.requrieBanlance("0x84E1e1b5B70ABA6500C4e96F11Cc78B84bB684f8").call({from:accounts[0]}).then(function(response){
-					$("#dcfxBanlance").html(0.00);
+					$("#dcfxBanlance").html("0.00");
 					var a = response/10**18;
 					
 					cfxpos.yesterdaybili().call({from:accounts[0]}).then(function(re){
