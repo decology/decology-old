@@ -150,7 +150,7 @@
 								1、流程：通过特邀链接激活-加入微信群-发送钱包地址等待添加白名。
 								2、初级空投、中级空投每24小时可以领取一次。
 								3、中级空投C链暂未开放。
-								4、每次0.4-1.2cDSME。
+								4、每次0.04-0.12cDSME。
 								5、邀请奖励:一级50%，二级20%，邀请链接联系微信获取。
 								cDSME合约地址:<br>cfx:acayf79s2bdjn8hhrjkj4g2j75e44y9rja1prjy0a9。
 							</div>
@@ -644,7 +644,7 @@
 			    bootbox.alert({
 				size: "small",
 				title: "CFX POS矿池提示",
-				message: "POS矿池已于4月28日清退，目前还有部分用户未完成领取，未清退的部分CFX我们将继续质押，期间所获收益全额返还给用户，与此同时，因为重新质押的原因，用户在完成清退步骤后将会在7-14天内收到对应的CFX以及额外的POS收益",
+				message: "POS矿池已于4月28日清退，目前还有部分用户未完成领取，该部分用户在完成清退步骤后将会在7-14天内收到对应的CFX",
 			})
 			}
 										
@@ -790,7 +790,7 @@
 				})
 				//查询质押CFX/FC LP 数量
 				chaxuncoin.requrieBanlance("0x831478f6e85d3481f123853065bc26660c699d81").call({from:accounts[0]}).then(function(response){
-					$("#dcflBanlance").html(toDecimal2(response/10**18));
+					$("#dcflBanlance").html(0.00);
 				})
 				//查询DCFX持币数量
 				chaxuncoin.requrieBanlance("0x84E1e1b5B70ABA6500C4e96F11Cc78B84bB684f8").call({from:accounts[0]}).then(function(response){
