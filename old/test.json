@@ -12,7 +12,7 @@
             "symbol": "HB",
             "name": "Tether USD",
             "address": "TJ2xCcFjvxRqpCMFdwDuew9Z3tLFFhB93t",
-            "chainId": 1,
+            "chainId": 2494104990,
             "decimals": 16,
             "logoURI": "https://static.tronscan.org/production/logo/usdtlogo.png"
         },
