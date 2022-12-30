@@ -609,7 +609,7 @@
 																title: "空投提示",
 																message:"恭喜您领取成功，本次空投公共基础系数Abs：" + response[0]/10 + ",空投随机系数N：" + response[3]/10 +  
 																",竞猜随机数M：" + response[1] + ",等级加成Ls：" + response[4] + "%,本次您已中奖，空投翻倍，共获得奖励 = Abs * N * 2 *(1+Ls) = " + response[2]/10**18 + " DSME" ,
-																callback:function(){location.reload();}
+																callback:function(){}
 															})
 														}else{
 															bootbox.alert({
@@ -617,7 +617,7 @@
 																title: "空投提示",
 																message:"恭喜您领取成功，本次空投公共基础系数Abs：" + response[0]/10 + ",空投随机系数N：" + response[3]/10 +
 																",竞猜随机数M：" + response[1] + ",等级加成Ls：" + response[4] + "%,本次您未中奖，共获得奖励 = Abs * N *(1+Ls) = " + response[2]/10**18 + " DSME" ,
-																callback:function(){location.reload();}
+																callback:function(){}
 															})
 														}
 													},function(){
