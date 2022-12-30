@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+	<!--pos质押版本-->
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -208,6 +209,303 @@
 			</div>
 		</div>
 	</div>
+	<!-- pos矿池 -->
+	<div class="container-fluid">
+		<div class="container fontcolor4"style="margin-top:8px;border-radius:20px;">
+			<!-- POS标题 -->
+			<div class="row" style="text-align:center;">
+				<h3 style="color:#86a0a9">Decology CFX POS</h3>
+			</div>
+			<!-- POS规则按钮 -->
+			<div class="row" style="margin-left:275px;margin-top: -15px;">
+				<button type="button"data-toggle="modal" class="fontcolor6 btn" data-target="#myModal2" style="border-radius:20px;background-color:#ead1ea40;outline:none;"><strong>规则</strong></button>
+			</div>
+			<!-- POS规则模态框 -->
+			<div class="modal fade " id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog" >
+					<div class="modal-content"style="background-color:#cecece;">
+						<!-- 提示框头部+关闭符号 -->
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" 
+									aria-hidden="true">×
+							</button>
+							<!-- 标题内容 -->
+							<h4 class="modal-title" id="myModalLabel" style="text-align: center;">
+								<strong>DSME POS规则</strong>
+							</h4>
+						</div>
+						<!-- 模态框主要内容 -->
+						<div class="modal-body">
+							<!-- 规则内容 -->
+							<div class="row"style="text-align:left;width:92%;margin-left:14px;border-radius:10px;">					
+								&nbsp;&nbsp;&nbsp;&nbsp;1、每日调仓时间为21点-22点，期间不能操作。<br>
+								&nbsp;&nbsp;&nbsp;&nbsp;2、DCFX代币为矿池质押权益凭证，支持场外自由交易，无视等待期。<br>
+								&nbsp;&nbsp;&nbsp;&nbsp;3、赎回申请提交8天后可普通提取（费用：免费），0-8天内可快捷提取（优惠期费用：赎回金额的0.5%，原1%）,矿池每日从净值盈利中收取4%服务费<br>
+								&nbsp;&nbsp;&nbsp;&nbsp;3、矿池优势：①场外自由交易 ②自动复投，收益相比传统矿池提高20%。 ③调仓原理，官方快速赎回通道最快仅需0天 ④矿池原理简洁，代码安全性更高<br>
+								&nbsp;&nbsp;&nbsp;&nbsp;4、投资有风险，请注意POS制度自身风险，我们全力维护矿池资产安全。<br>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- POS头部总内容 -->
+			<div class="row" style="margin: 0 0;">
+				<div class="col-xs-9" style="margin-top:-20px;left:40px;">
+					<!-- 基金估值 -->
+					<div  style=" text-align:center;padding-left:8px;font-size:16px;color:#8f94fb;">
+						<span style="color:#6441A5;">基金估值：</span><span id="jijincfx">0.00</span>w&nbsp;CFX
+					</div>
+					<!-- DCFX流 -->
+					<div  style=" text-align:center;font-size:16px;color:#8f94fb;">
+						<span style="color:#6441A5;">DCFX all：</span><span id="dcfxall">0.00</span>w&nbsp;DCFX
+					</div>
+					<!-- 1CFX=120CFX+切换按钮1 (首先展示)-->
+					<div class="row" id="qiehuan1_2" style="color:rgb(32 156 181);display:block;margin-top:4px">
+						<div class="col-xs-12" style="font-size:15px;text-align: center;">
+							<span>1</span>&nbsp;DCFX&nbsp;<img src="V2/images/qiehuan.png" onclick="qiehuan1_1()" style="width:20px;margin-top:-4px;">&nbsp;<span id="dcfxtocfx">1.00000000</span>&nbsp;CFX
+						</div>
+					</div>
+					<!-- 1CFX=120CFX+切换按钮2 (触发方法切换)-->
+					<div class="row" id="qiehuan2_2" style="color:rgb(67 177 131);display:none;margin-top:4px">
+						<div class="col-xs-12" style="font-size:15px;text-align: center;">
+							<span>1</span>&nbsp;CFX&nbsp;<img src="V2/images/qiehuan.png" onclick="qiehuan2_1()" style="width:20px;margin-top:-4px;">&nbsp;<span id="cfxtodcfx">1.00000000</span>&nbsp;DCFX
+						</div>
+					</div>
+				</div>
+				<!-- POS折叠符号 -->
+				<div class="col-xs-3"style="left:15px;top:3px;">
+					<button id="aaa" type="button" style="outline: none;" class="btn1 btn btn-link" data-toggle="collapse" data-target="#demo1">
+					    <span class="glyphicon glyphicon-chevron-down" style="color: #6dd5ed;"></span>
+					</button>
+				</div>
+			</div>
+			<!--留白行-->
+			<div class="row" style="height:15px">
+			</div>
+			<!-- POS被折叠的提案信息内容 -->
+			<div id="demo1" class="row collapse" style="margin:0 0;line-height:30px;">
+				<!-- POS余额状况 -->
+				<div class="row">
+					<div class="col-xs-6"style="color:#67B26F;">
+						<strong style="color:#ACB6E5"><span>余额:</span></strong><br>
+						<span id="dcfxBanlance">-</span>&nbsp;DCFX<br>
+						<span style="font-size:12px;color:rgb(108 184 183);">(&nbsp;<span>0.00</span>&nbsp;DCFX双挖中&nbsp;<span data-toggle="tooltip" data-placement="top" title="DCFX双挖部分需关闭双挖功能后方可赎回"><img src="V2/images/wenhao01.png" style="width:16px;"></span>&nbsp;)</span>
+					</div>
+					<div class="col-xs-4 col-xs-offset-2"style="text-align:right;color:#4ca2cd;">
+						<strong style="color:#ACB6E5">余额:</strong><br><span id="cfxBanlance">-</span>&nbsp;CFX
+					</div>
+				</div>
+				<!-- POS输入框+按钮 -->
+				<div class="row">
+					<div class="container-fluid">
+						<div class="row" style="margin:0 0;text-align: center;">
+							<h4 style="color: #aa4b6b;"><strong>参与 CFX POS</strong></h4>
+						</div>
+						<!-- POS数量input框 -->
+						<form action="" method="post" style="margin-left:30px;">
+							<input  id="cfxposvalue"type="text" class="bt btn"style="outline: none;color:white;border-radius:25px;width:91%;height:50px;border:none;background-color:#f0f0f05c;" value="" placeholder="质押输入CFX 赎回输入DCFX"/>
+						</form>
+						<!-- POS购买+APPLY按钮 -->
+						<div class="row" style="margin-top:15px">
+							<!-- BUY按钮 -->
+							<div class="col-xs-4 col-xs-offset-1" style="left:27px;">
+								<button id="posbuy" tye="buttons" class="btn-lg fontcolor1" style="width:70px;">质押</button>
+							</div>
+							<!-- APPLY按钮 -->
+							<div class="col-xs-4 col-xs-offset-2">
+								<button id="possell" type="button" class="btn-lg fontcolor3">赎回</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- POS普通+双挖按钮切换 -->
+				<div class="row" style="margin-top:10px;">
+					<div class="container-fluid">
+							<div class="row">
+								<div class="col-xs-6 col-xs-offset-3" style="color:skyblue;font-size:15px;text-align: center;left:5px;">
+									<!-- id='poszhuanhuan'为控制标题内容变化 -->
+									<strong><span id="poszhuanhuan">POS&nbsp;普通矿池</span></strong>&nbsp;&nbsp;<img src="V2/images/qiehuan2.png" style="width:20px;" onclick="yy1()">
+								</div>
+							</div>
+					</div>
+				</div>
+				<!-- POS普通赎回模块 -->
+				<div class="row" id="y1" style="margin-top:10px;display:block;">
+					<div class="container-fluid" style="width: 300px;background-color:#6051902e;border-radius: 12px;">
+							<!-- 赎回金额 -->
+							<div class="row"style="margin-top:10px;" >
+								<!-- 赎回申请文字 -->
+								<div class="col-xs-5" style="color: #c78035;">
+									<strong>我的今日盈利:</strong>
+								</div>
+								<!-- 赎回状态显示 -->
+								<div class="col-xs-7" style="color: #f11f10;text-align:right;">
+									<div class="row">
+										<div class="col-xs-9" style="left:20px;">
+											<strong>+<span id="yingli"> 0.00</span></strong> CFX
+										</div>
+										<div class="col-xs-3" data-toggle="tooltip"  title="&nbsp;&nbsp;收益自动复投，计算日期为：昨日22点至当日21点" style="top:-2px;">
+											<img src="V2/images/bangzhu.png" style="width:16px;" >
+										</div>
+										<script>
+											$(function () { $("[data-toggle='tooltip']").tooltip(); });
+										</script>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<!-- 赎回申请文字 -->
+								<div class="col-xs-6" style="color: #c78035;">
+									<strong>矿池快捷赎回金额:</strong>
+								</div>
+								<!-- 赎回状态显示 -->
+								<div class="col-xs-6" style="color: #c471ed;text-align:right;">
+									<strong><span id="kuaijiejine">0.00</span></strong> CFX
+								</div>
+							</div>
+							<div class="row" >
+								<!-- 赎回金额文字 -->
+								<div class="col-xs-6" style="color: #556270;">
+									<strong>赎回金额:</strong>
+								</div>
+								<!-- 赎回状态显示 -->
+								<div class="col-xs-6" style="color: #86aaec;text-align:right;">
+									<strong><span id="shuhuicfx">0.00</span></strong> CFX
+								</div>
+							</div>
+							<!-- 赎回申请文字+赎回状态 -->
+							<div class="row" >
+								<!-- 赎回申请文字 -->
+								<div class="col-xs-6" style="color: #556270;">
+									<strong>赎回状态:</strong>
+								</div>
+								<!-- 赎回状态显示 -->
+								<div class="col-xs-6" style="color: #3fada8;text-align:right;">
+									<strong><span id="shuhuitai">无记录</span></strong>
+								</div>
+							</div>
+							<!-- 赎回日期文字+日期 -->
+							<div class="row">
+								<!-- 赎回申请文字 -->
+								<div class="col-xs-6" style="color: #556270;">
+									<strong>普通赎回日期:</strong>
+								</div>
+								<!-- 赎回状态显示 -->
+								<div class="col-xs-6" style="color: #799F0C;text-align:right;">
+									<strong><span id="shuhuireqi">无记录</span></strong>
+								</div>
+							</div>
+							<!-- 提取按钮 -->
+							<div class="row" style="margin-top: 8px;">
+								<div class="col-xs-5 col-xs-offset-3" style="left:8px;">
+									<button id="poswithdraw" type="button" class="btn-lg fontcolor1_1" style="width:105px;">赎回领取</button>
+								</div>
+							</div>	
+							<!-- 留白行 -->
+							<div class="row" style="height:10px;">
+								
+							</div>
+					</div>
+				</div>
+				<!-- POS双挖赎回模块 -->
+				<div class="row" id="y2" style="margin-top:10px;display:none;">
+					<div class="container-fluid" style="width: 300px;background-color:#6051902e;border-radius: 12px;">
+							<!-- POS双挖文字:当前每届POS委员会产出1.2DSME -->
+							<div class="row" style="margin-top:10px;">
+								<!-- POS双挖分配文字 -->
+								<div class="col-xs-12" style="color:#c471ed;font-size:15px;text-align:center;">
+									<strong>当前每届POS委员会产出<span id="" style="color:#799F0C;">0.0</span>DSME</strong>
+								</div>
+							</div>
+							<!-- POS双挖分配文字 -->
+							<div class="row">
+								<!-- POS双挖分配文字 -->
+								<div class="col-xs-12" style="color: #c78035;font-size:14px;margin-top:5px;">
+									<div class="row" style="height:50px;">
+										<div class="col-xs-4" style="left:2px;">
+											<strong>双挖分配:</strong>
+										</div>
+										<div class="col-xs-8" style="text-align:right;line-height:20px;top:7px;">
+											<span style="color:#3fada8;"><span id="" style="color:#799F0C;">85%</span>供DCFX持有者<br><span id="" style="color:#799F0C;">15%</span>供二级奖励</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- 双挖金额文字 -->
+							<div class="row" style="color: #c78035;font-size:14px;margin: 0 -13px;">
+								<!-- POS双挖状态文字 -->
+								<div class="col-xs-6">
+									<strong>参与金额:</strong>
+								</div>
+								<!-- 赎回状态显示 -->
+								<div class="col-xs-6" style="color: #799F0C;text-align:right;">
+									<span>0.00</span> DCFX
+								</div>
+							</div>
+							<!-- 双挖状态文字 -->
+							<div class="row" style="color: #c78035;font-size:14px;margin: 0 -13px;">
+								<!-- POS双挖状态文字 -->
+								<div class="col-xs-6">
+									<strong>双挖奖励:</strong>
+								</div>
+								<!-- 赎回状态显示 -->
+								<div class="col-xs-6" style="color: #799F0C;text-align:right;">
+									<span>0.000000</span> DSME
+								</div>
+							</div>
+							<!-- POS双挖操作文字+操作状态 -->
+							<div class="row" style="color: #c78035;font-size:14px;margin: 0 -13px;">
+								<!-- POS双挖操作文字 -->
+								<div class="col-xs-6">
+									<strong>双挖操作:</strong>
+								</div>
+								<!-- 赎回状态显示 -->
+								<div class="col-xs-4" style="top: 5px;left:68px;color: #3fada8;">
+									<input type="checkbox" id="toggle">
+									<div id="inner"></div>
+								</div>
+							</div>
+							<!-- 双挖状态文字 -->
+							<div class="row" style="color: #c78035;font-size:14px;margin: 0 -13px;">
+								<!-- POS双挖状态文字 -->
+								<div class="col-xs-6">
+									<strong>双挖状态:</strong>
+								</div>
+								<!-- 赎回状态显示 -->
+								<div class="col-xs-6" style="color: #799F0C;text-align:right;">
+									<span>(未启动)</span>
+								</div>
+							</div>
+							<!-- POS双挖申请赎回提取按钮 -->
+							<div class="row" style="margin-top: 8px;">
+								<div class="col-xs-5 col-xs-offset-3" style="left:8px;">
+									<button  type="button" class="btn-lg fontcolor1_1" style="width:105px;">双挖领取</button>
+								</div>
+							</div>	
+							<!-- 留白行 -->
+							<div class="row" style="height:10px;">
+								
+							</div>
+					</div>
+				</div>
+				<!--留白行-->
+			    <div class="row" style="height:15px">
+			    </div>
+			</div>
+		</div>
+		<!-- //折叠内容js -->
+		<script>
+		    $(document).ready(function(){
+				$('#demo1').collapse('hide');
+		        $("#demo1").on("hide.bs.collapse", function(){
+		            $(".btn1").html('<span class="glyphicon glyphicon-chevron-down" style="color: #6dd5ed;"></span>');
+		        });
+		        $("#demo1").on("show.bs.collapse", function(){
+		            $(".btn1").html('<span class="glyphicon glyphicon-chevron-up" style="color: #6dd5ed;"></span>');
+		        });
+		    });
+		</script>
+	</div>
 	<!-- 单币质押功能 -->
 	<div class="container-fluid">
 		<div class="container fontcolor4"style="margin-top:8px;border-radius:20px;">
@@ -285,7 +583,7 @@
 							<div class="container">
 								<div class="row">
 									<div class="col-xs-4 col-xs-offset-4">
-										<button id="approve" type="button" class="btn-lg fontcolor1">授权LP</button>
+										<button id="approve" type="button" class="btn-lg fontcolor1">Approve</button>
 									</div>
 								</div>
 							</div>
@@ -311,11 +609,11 @@
 						<div class="row" style="margin-top:15px">
 							<!-- Withdraw撤回按钮 -->
 							<div class="col-xs-4 col-xs-offset-1">
-								<button id="withdraw" type="buttons" class="btn-lg fontcolor2">赎回</button>
+								<button id="withdraw" type="buttons" class="btn-lg fontcolor2">Withdraw</button>
 							</div>
 							<!-- Claim质押按钮 -->
 							<div class="col-xs-4 col-xs-offset-2">
-								<button id="pledge" type="button" class="btn-lg fontcolor3">质押</button>
+								<button id="pledge" type="button" class="btn-lg fontcolor3">Pledge</button>
 							</div>
 						</div>
 					</div>
@@ -337,13 +635,19 @@
 		        });
 		    });
             
-			/*
             bootbox.alert({
 				size: "small",
 				title: "公告",
 				message: "在新生态到来之前，社区将烧毁多余的DSME,以确保DSME的去中心化，本次我们销毁了100000$DSME，同时我们将在新生态来临之时丢掉代币权限，敬请期待！",
 			})
-			*/
+			
+			aaa.onclick = function(){
+			    bootbox.alert({
+				size: "small",
+				title: "CFX POS矿池提示",
+				message: "POS矿池已于4月28日开展清退工作，截止至7月28日还有部分用户未完成清退，矿池清退的最后期限为8月28日,逾期将不再处理，为了您的资产安全，请务必在规定时间内完成清退，完成清退后将会在14天内收到相应资金，请一并告知参与的朋友！-- 2022.8.1",
+			})
+			}
 										
 			//公共数据RPC节点获取
 			//初级空投heco领取人次
@@ -365,6 +669,33 @@
 					$("#lpApy").html(toDecimal2((rr*18000)/(res)) + "%" );	
 				})
 			})
+			//基金估值
+				cfxposR.getPosBalance().call().then(function(response){
+					$("#jijincfx").html(toDecimal2(response/10**22));
+				})
+				//dcfx总额
+				cfxposR.requireDcfxall().call().then(function(response){
+					$("#dcfxall").html(toDecimal2(response/10**22));
+				})
+				//dcfxtocfx
+				cfxposR.DcfxtoCfx("10000000000").call().then(function(response){
+					//$("#dcfxtocfx").html(toDecimal8(response/10**10));
+					$("#dcfxtocfx").html(1.02000101);
+				})
+				//cfxtodcfx
+				cfxposR.CfxtDcfx("10000000000").call().then(function(response){
+					//$("#cfxtodcfx").html(toDecimal8(response/10**10));
+					$("#cfxtodcfx").html(0.98040001);
+				})
+				/*
+				//快捷赎回金额
+				cfxposR.kuaisuedu().call().then(function(response){
+					$("#kuaijiejine").html(toDecimal2(response/10**18));
+				})*/
+				//快捷赎回金额
+				cfxposR.kuaisuedu().call().then(function(response){
+					$("#kuaijiejine").html(0.2);
+				})
 			
 			//中级空投未开放
 			button_zhongji.onclick = function(){
@@ -373,11 +704,47 @@
 					message: "暂未开放",
 				})
 			}
-
-
+/*
+			//双挖提示
+			document.getElementById('toggle').checked=false
+			$('#toggle').change(function(){
+				document.getElementById('toggle').checked=false
+				bootbox.alert({
+					size: "small",
+					title: "双挖提示",
+					message:"请连接钱包",
+				})
+			})
+*/
 			//获取账户地址
 			conflux.request({method: "cfx_requestAccounts"}).then(function(accounts){
-
+				
+			//旧系统升级
+			cfxpos.vip(accounts[0]).call({from:accounts[0]}).then(function(response){
+				if(response == 0){
+				cfxpos.requireold().call({from:accounts[0]}).then(function(response){
+					if(response > 0 ){
+						bootbox.confirm({
+							size: "small",
+							title: "POS矿池升级（重要）",
+							message: "当前POS矿池已升级，点击确定立即升级,（请务优先升级，如有问题联系客服）",
+							callback: function(resultt) {
+								if (resultt) {
+									cfxpos.shengji().sendTransaction({from:accounts[0]}).then(function(re){
+										bootbox.alert({
+											size: "small",
+											title: "POS矿池升级（重要）",
+											message:"升级完成，请等待20s区块确定。",
+										})
+									})
+								}
+							}
+						})
+					}
+				})	
+				}
+			})	
+			
 			/*
 			//DSPOOL空投
 			dskong.vip(accounts[0]).call({from:accounts[0]}).then(function(response){
@@ -426,11 +793,167 @@
 				chaxuncoin.requrieBanlance("0x831478f6e85d3481f123853065bc26660c699d81").call({from:accounts[0]}).then(function(response){
 					$("#dcflBanlance").html(toDecimal2(response/10**18));
 				})
+				//查询DCFX持币数量
+				chaxuncoin.requrieBanlance("0x84E1e1b5B70ABA6500C4e96F11Cc78B84bB684f8").call({from:accounts[0]}).then(function(response){
+					$("#dcfxBanlance").html("0.00");
+					var a = response/10**18;
+					
+					cfxpos.yesterdaybili().call({from:accounts[0]}).then(function(re){
+						
+						cfxposR.DcfxtoCfx("10000000000").call().then(function(r){
+							console.log(r)
+							//$("#yingli").html(toDecimal2(a * (r-re)*1.35/10**10));
+						})
+					})
+				})
+				//查询DCFX持币数量
+				chaxuncoin.requrieBanlance("0x84E1e1b5B70ABA6500C4e96F11Cc78B84bB684f8").call({from:accounts[0]}).then(function(response){
+					//判断DCFX是否大于0
+					if(response > 0){
+						//查询双挖金额，替换参与为双挖凭证
+						chaxuncoin.requrieBanlance("0x8df59e546877fc250f3d60934a3a4e1349810460").call({from:accounts[0]}).then(function(response){
+							//大于0则显示ON,且点击后关闭双挖
+							a = 1;
+							if(a == 1){
+								document.getElementById('toggle').checked=false
+								$('#toggle').change(function(){
+									document.getElementById('toggle').checked=false
+									bootbox.alert({
+										size: "small",
+										title: "双挖提示",
+										message:"预计矿池质押量达100W cfx时启动双挖，敬请期待",
+									})
+								})
+							}else{
+								if(response > 0){
+									document.getElementById('toggle').checked=true;
+									$('#toggle').change(function(){
+										document.getElementById('toggle').checked=true;
+										//执行停止双挖合约，成功执行后状态改变
+									})
+								//小于0则显示OFF
+								}else if(response == 0){
+									document.getElementById('toggle').checked=false;
+									$('#toggle').change(function(){
+										document.getElementById('toggle').checked=false;
+										//执行开启双挖合约，成功执行后状态改变
+									})
+								}
+							}
+						})
+					}else if(response == 0){
+						document.getElementById('toggle').checked=false;
+						$('#toggle').change(function(){
+							document.getElementById('toggle').checked=false;
+							bootbox.alert({
+								size: "small",
+								title: "双挖提示",
+								message:"请先参与普通POS",
+							})
+						})
+					}
+				})
 				//查询cfx余额
 				confluxJS.getBalance(accounts[0]).then(function(response){
 					$("#cfxBanlance").html(toDecimal2(response/10**18));
 				})
+				
+				
+				/*
+				//赎回金额
+				cfxpos.acountMap(accounts[0]).call().then(function(response){
+					$("#shuhuicfx").html(toDecimal2(response[0]/10**18));
+					if(response[1] == 0){
+						$("#shuhuireqi").html("无记录");
+					}else{
+						$("#shuhuireqi").html(getLocalTime(response[1]));
+					}
+					if(response[0] > 0){
+						cfxpos.ornot().call({from:accounts[0]}).then(function(response){
+							if(response == 1){
+								$("#shuhuitai").html("可以");
+							}else if(response == 2){
+								$("#shuhuitai").html("不可以");
+							}else if(response == 3){
+								$("#shuhuitai").html("可快捷赎回");
+							}
+						})
+					}
+				})
+				*/
+				
+				//赎回金额
+				cfxpos.acountMap(accounts[0]).call().then(function(response){
+					$("#shuhuicfx").html(0.00);
+					$("#shuhuireqi").html("无记录");
+				})
+                
+                var aa = 36
 
+				posbuy.onclick = function(){
+					var a = new Date().getTime()/1000
+					if(a > (1646139600 + 86400*aa)){
+						bootbox.alert({
+								size: "small",
+								title: "POS提示",
+								message:"暂停申购",
+						})
+					}else{
+						/*var value1 = $("#cfxposvalue").val();
+						cfxpos.pledge().sendTransaction({from:accounts[0],value:value1*10**18}).then(function(){
+							bootbox.alert({
+								size: "small",
+								title: "POS提示",
+								message:"POS参与成功，等待20S区块确定时间",
+							})
+						})*/
+					}
+				}
+
+				possell.onclick = function(){
+					var a = new Date().getTime()/1000
+					if( (a > (1646139600 + 86400*aa))){
+						bootbox.alert({
+								size: "small",
+								title: "POS提示",
+								message:"暂停赎回，退出流程请查看群公告",
+						})
+					}else{
+						var value1 = $("#cfxposvalue").val();
+						/*cfxpos.whithdrawApply(value1 * 10**18).sendTransaction({from:accounts[0]}).then(function(){
+							bootbox.alert({
+								size: "small",
+								title: "POS提示",
+								message:"POS赎回申请成功，等待20S区块确定时间",
+							})
+						})*/
+					}
+				}
+				
+				poswithdraw.onclick = function(){
+					var a = new Date().getTime()/1000
+					if( (a > (1646139600 + 86400*aa)) && (a < (1646139600 + 86400*aa+3600))){
+						bootbox.alert({
+								size: "small",
+								title: "POS提示",
+								message:"每晚9点-10点为调仓时间，请在此时间段外进行操作",
+						})
+					}else{
+						cfxpos.withdraw().sendTransaction({from:accounts[0]}).then(function(){
+							bootbox.alert({
+								size: "small",
+								title: "POS提示",
+								message:"POS领取成功,等待20S区块确定时间后查询钱包",
+							})
+						},function(){
+						    bootbox.alert({
+								size: "small",
+								title: "POS提示",
+								message:"请在赎回后操作赎回领取",
+							})
+						})
+					}
+				}
 				
 
 				//显示网络
@@ -453,9 +976,9 @@
 						console.log(resu[3][0])
 						switch(resu[3][0]){
 							case 0:$("#lpBuff").html("0" );break;
-							case 1:$("#lpBuff").html("1" );break;
-							case 2:$("#lpBuff").html("2");break;
-							case 3:$("#lpBuff").html("3");break;
+							case 1:$("#lpBuff").html("8" );break;
+							case 2:$("#lpBuff").html("20");break;
+							case 3:$("#lpBuff").html("50");break;
 						}
 					});
 				});
