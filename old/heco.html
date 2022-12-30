@@ -4,6 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Decology</title>
+		
 		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
 		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -498,7 +499,6 @@
 					$("#lpApy2").html(toDecimal2((rr*36500*3)/(res)) + "%" );	
 				})
 			})
-
 			//获取账户地址
             web3js.eth.getAccounts(function(error,result){
 				//查询DSME数量
@@ -530,7 +530,6 @@
 				kongtou_chuji.methods.playmap(result[0]).call().then(function(result) {
 						$("#chu_ge").html( result[1] );		
 				});
-                
 				/*
 				//BUFF
 				//个人属性
@@ -547,7 +546,6 @@
 					});
 				});
                 */
-				
                 //邀请码
 				var a = 1000;
 				var aherf = window.location.href;
