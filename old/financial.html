@@ -90,12 +90,22 @@
 
 			button_insure3.onclick = function(){
 				
-				window.location = "dspool/pledge_insure3.html";
+				bootbox.alert({
+					size: "small",
+					title: "结束提示",
+					message: "本期质押已结束喽~",
+				})
+				//window.location = "dspool/pledge_insure3.html";
 			}
 
 			button_insure2.onclick = function(){
 				
-				window.location = "dspool/pledge_insure2.html";
+				bootbox.alert({
+					size: "small",
+					title: "结束提示",
+					message: "本期质押已结束喽~",
+				})
+				//window.location = "dspool/pledge_insure2.html";
 			}
 
 			button_dbtc.onclick = function(){
@@ -154,8 +164,8 @@
 
 			test_dspool.methods.reward_day_have().call().then(function(res){
 				test_dspoolin.methods.reward_day_have().call().then(function(re){
-					$("#jiangli_all").html(toDecimal2(res/10**18 + re/10**18 +200) );
-					$("#jiangli_day").html("3.00");
+					$("#jiangli_all").html(toDecimal2(res/10**18 + re/10**18 +800) );
+					$("#jiangli_day").html("0.50");
 				});	
 			});
 		}
