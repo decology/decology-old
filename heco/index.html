@@ -148,9 +148,9 @@
 						<div class="modal-body">
 							<!-- 规则内容 -->
 							<div class="row"style="width:92%;margin-left:14px;border-radius:10px;">					
-								1、流程：通过特邀链接激活-加入QQ群-发送钱包地址等待添加白名。
+								1、流程：通过特邀链接激活-获取白名单。
 								2、初级空投、中级空投每24小时可以领取一次。
-								3、邀请奖励:一级50%，二级20%，邀请链接联系QQ获取。
+								3、邀请奖励:一级8%，二级5%，
 								DSME合约地址:<br>0xdc38a8732f236e8F3E993775F0a68b7126a67e3C
 							</div>
 						</div>
@@ -471,6 +471,9 @@
 			test_dspool2 = test_dspool;
 			//DSPOOL-DBTC
             test_dspool = dspool_dbtc;
+
+			let dbtced = 0;
+			let dsmeed = 0;
             
 			//公共数据RPC节点获取
 			//初级空投heco领取人次
@@ -513,10 +516,36 @@
 				//查询质押DBTC数量
                 coin_balance.methods.requrie_banlance("0x0fea739de3B4fd3D21eCa5A011a4e96bB9f4919b").call({from:result[0]}).then(function(resu){
 					$("#dcflBanlance").html(toDecimal4(resu/10**18));
+					//刷新收益
+					if(resu > 0){
+						//DSPOOL-DBTC收益
+						test_dspool.methods.calculation().call({from:result[0]}).then(function(re){
+							$("#lpShouyi").html(toDecimal8(re/10**18));
+						})
+						var accountInterval = setInterval(function() {
+							//DSPOOL-DBTC收益
+							test_dspool.methods.calculation().call({from:result[0]}).then(function(re){
+								$("#lpShouyi").html(toDecimal8(re/10**18));
+							})
+						}, 3000);
+					}
 				})
 				//查询质押DSME数量
                 coin_balance.methods.requrie_banlance("0x5413f42064ed7beb1f50d368df6b85d63873f525").call({from:result[0]}).then(function(resu){
 					$("#dcflBanlance2").html(toDecimal4(resu/10**18));
+					//刷新收益
+					if(resu > 0){
+						//DSPOOL-DSME收益
+						test_dspool2.methods.calculation().call({from:result[0]}).then(function(re){
+							$("#lpShouyi2").html(toDecimal8(re/10**18));
+						})
+						var accountInterval = setInterval(function() {
+							//DSPOOL-DSME收益
+							test_dspool2.methods.calculation().call({from:result[0]}).then(function(re){
+								$("#lpShouyi2").html(toDecimal8(re/10**18));
+							})
+						}, 3000);
+					}
 				})
 
 				//显示网络
@@ -766,11 +795,6 @@
 						})
 					})	
 				}
-				
-				//DSPOOL-DBTC收益
-                test_dspool.methods.calculation().call({from:result[0]}).then(function(re){
-					$("#lpShouyi").html(toDecimal8(re/10**18));
-				})
 
 				//质押DSME
 				pledge2.onclick = function(){
@@ -818,11 +842,6 @@
 						})
 					})	
 				}
-				
-				//DSPOOL-DSME收益
-                test_dspool2.methods.calculation().call({from:result[0]}).then(function(re){
-					$("#lpShouyi2").html(toDecimal8(re/10**18));
-				})
 			})	
 		</script>
 		

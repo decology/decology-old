@@ -426,6 +426,19 @@
 				//查询质押CFX/FC LP 数量
 				chaxuncoin.requrieBanlance("0x831478f6e85d3481f123853065bc26660c699d81").call({from:accounts[0]}).then(function(response){
 					$("#dcflBanlance").html(toDecimal2(response/10**18));
+					//刷新收益
+					if(response > 0){
+						//lp收益
+						dspoolcfl.calculation().call({from:accounts[0]}).then(function(re){
+							$("#lpShouyi").html(toDecimal8(re/10**18));
+						})
+						var accountInterval = setInterval(function() {
+							//lp收益
+							dspoolcfl.calculation().call({from:accounts[0]}).then(function(re){
+								$("#lpShouyi").html(toDecimal8(re/10**18));
+							})
+						}, 3000);
+					}
 				})
 				//查询cfx余额
 				confluxJS.getBalance(accounts[0]).then(function(response){
@@ -610,11 +623,7 @@
 							message: "撤回失败",
 						})
 					})	
-				}
-				//lp收益
-				dspoolcfl.calculation().call({from:accounts[0]}).then(function(re){
-					$("#lpShouyi").html(toDecimal8(re/10**18));
-				})
+				}				
 			})	
 		</script>
 		
