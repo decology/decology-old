@@ -504,6 +504,37 @@
 			})
 			//获取账户地址
             web3js.eth.getAccounts(function(error,result){
+
+				//防止API获取失败，再次获取
+				//初级空投heco领取人次
+				kongtou_chuji.methods.random().call().then(function(res){
+					//初级空投conflux领取人次
+					kongtouR.random().call({from:"0x1a781152365291daa5e06617e59019c7d7c8cc6b"}).then(function(response){
+						$("#chu_all").html( response[0]/1 + res/1 );
+					})
+				})
+				//中级空投领取人次
+				test_kongtou.methods.random().call().then(function(response){
+					$("#zhong_all").html( response/2 + 1845.5 );
+				})
+				
+				//DBTC-lp质押总量与质押年华率
+				dspool_dbtc.methods.pledge_all().call().then(function(res){
+					dspool_dbtc.methods.reward_day().call().then(function(rr){
+						$("#lpAll").html(toDecimal4(res/ 10**18));
+						$("#lpApy").html(toDecimal2((rr*0.5*36500*2)/(res*108000)) + "%" );	
+					})
+				})
+				//DSME-lp质押总量与质押年华率
+				test_dspool.methods.pledge_all().call().then(function(res){
+					test_dspool.methods.reward_day().call().then(function(rr){
+						$("#lpAll2").html(toDecimal4(res/ 10**18));
+						$("#lpApy2").html(toDecimal2((rr*36500*3)/(res)) + "%" );	
+					})
+				})
+
+
+
 				//查询DSME数量
                 coin_balance.methods.requrie_banlance("0xdc38a8732f236e8f3e993775f0a68b7126a67e3c").call({from:result[0]}).then(function(resu){
 					$("#dsmeBanlance").html(toDecimal2(resu/10**18));
