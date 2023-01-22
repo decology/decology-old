@@ -526,8 +526,8 @@
 					})
 				})
 				//DSME-lp质押总量与质押年华率
-				test_dspool.methods.pledge_all().call().then(function(res){
-					test_dspool.methods.reward_day().call().then(function(rr){
+				test_dspool2.methods.pledge_all().call().then(function(res){
+					test_dspool2.methods.reward_day().call().then(function(rr){
 						$("#lpAll2").html(toDecimal4(res/ 10**18));
 						$("#lpApy2").html(toDecimal2((rr*36500*3)/(res)) + "%" );	
 					})
