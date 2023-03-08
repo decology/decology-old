@@ -711,7 +711,7 @@
 				//授权DBTC数量
 				approve.onclick = function(){
 					var value = $("#approveValue").val();
-                    var resul2 = value +"000000000000000000";
+                    var resul2 = value*100000000 +"0000000000";
 					dbtc.methods.approve('0xAaE080a4ac77529Ac2efc65D854b8b587eF808cd',resul2).send({from:result[0]}).then(function(r){
 						bootbox.alert({
 							size: "small",
@@ -724,8 +724,8 @@
 				//授权DSME数量
 				approve2.onclick = function(){
 					var value = $("#approveValue2").val();
-                    var resul2 = value +"000000000000000000";
-					dbtc.methods.approve('0xdc38a8732f236e8f3e993775f0a68b7126a67e3c',resul2).send({from:result[0]}).then(function(r){
+                    var resul2 = value*100000000 +"0000000000";
+					dsmecoin.methods.approve('0x8ab98958da97d492543dee98075bd1d370908a0e',resul2).send({from:result[0]}).then(function(r){
 						bootbox.alert({
 							size: "small",
 							title: "交易提示",
@@ -781,7 +781,7 @@
 				//质押DBTC
 				pledge.onclick = function(){
 					var value = $("#changeValue").val();
-                    var resul2 = value +"000000000000000000";
+                    var resul2 = value*100000000 +"0000000000";
 					if(new Date().getTime() / 1000 < 1644753600){
 						bootbox.alert({
 							size: "small",
@@ -809,7 +809,7 @@
 				//撤回DBTC
 				withdraw.onclick = function (){
 					var value = $("#changeValue").val();
-                    var resul2 = value +"000000000000000000";
+                    var resul2 = value*100000000 +"0000000000";
                     test_dspool.methods.withdraw_pledge(resul2).send({from:result[0],gas:300000}).then(function(ree){
 						bootbox.alert({
 							size: "small",
@@ -828,7 +828,7 @@
 				//质押DSME
 				pledge2.onclick = function(){
 					var value = $("#changeValue2").val();
-                    var resul2 = value +"000000000000000000";
+                    var resul2 = value*100000000 +"0000000000";
 					if(new Date().getTime() / 1000 < 1644753600){
 						bootbox.alert({
 							size: "small",
@@ -856,7 +856,7 @@
 				//撤回DSME
 				withdraw2.onclick = function (){
 					var value = $("#changeValue2").val();
-                    var resul2 = value +"000000000000000000";
+                    var resul2 = value*100000000 +"0000000000";
                     test_dspool2.methods.withdraw_pledge(resul2).send({from:result[0],gas:300000}).then(function(ree){
 						bootbox.alert({
 							size: "small",
