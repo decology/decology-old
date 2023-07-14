@@ -349,12 +349,12 @@
 			KC_heco.methods.random().call().then(function(res){
 				//初级空投conflux领取人次
 				kongtouR.random().call({from:"0x1a781152365291daa5e06617e59019c7d7c8cc6b"}).then(function(response){
-					$("#chu_all").html( response[0]/1 + res/1 );
+					$("#chu_all").html( Number(response[0])/1 + Number(res)/1 );
 				})
 			})
 			//中级空投领取人次
 			KZ_heco.methods.random().call().then(function(response){
-				$("#zhong_all").html( response/2 + 1845.5 );
+				$("#zhong_all").html(Number(response)/2 + 1845.5 );
 			})
 			//lp质押总量与质押年华率
 			//lp显示

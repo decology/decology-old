@@ -478,26 +478,26 @@
 			KC_heco.methods.random().call().then(function(res){
 				//初级空投conflux领取人次
 				kongtouR.random().call({from:"0x1a781152365291daa5e06617e59019c7d7c8cc6b"}).then(function(response){
-					$("#chu_all").html( response[0]/1 + res/1 );
+					$("#chu_all").html( BigInt(response[0]) + res );
 				})
 			})
 			//中级空投领取人次
 			KZ_heco.methods.random().call().then(function(response){
-				$("#zhong_all").html( response/2 + 1845.5 );
+				$("#zhong_all").html( response + BigInt(1845) );
 			})
 			
 			//DBTC-lp质押总量与质押年华率
             dbtcr.methods.pledge_all().call().then(function(res){
 				dbtcr.methods.reward_day().call().then(function(rr){
-					$("#lpAll").html(toDecimal4(res/ 10**18));
-					$("#lpApy").html(toDecimal2((rr*0.5*36500*2)/(res*108000)) + "%" );	
+					$("#lpAll").html(toDecimal4(Number(res)/10**18));
+					$("#lpApy").html(toDecimal4((Number(rr)*36500)/(Number(res)*108000)) + "%" );	
 				})
 			})
 			//DSME-lp质押总量与质押年华率
 			dsmer.methods.pledge_all().call().then(function(res){
 				dbtcr.methods.reward_day().call().then(function(rr){
-					$("#lpAll2").html(toDecimal4(res/ 10**18));
-					$("#lpApy2").html(toDecimal2((rr*36500*3)/(res)) + "%" );	
+					$("#lpAll2").html(toDecimal4(Number(res)/10**18));
+					$("#lpApy2").html(toDecimal4((Number(rr)*36500*3)/(Number(res))) + "%" );	
 				})
 			})
 			//获取账户地址
