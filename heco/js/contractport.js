@@ -15,6 +15,7 @@ if (window.ethereum) {
 	try {
 	// 请求用户授权
 	window.ethereum.enable();
+    //window.ethereum.send('eth_requestAccounts')
 	} catch (error) {
 	// 用户不授权时
 	alert("User denied account access");
@@ -25,6 +26,7 @@ if (window.ethereum) {
 	web3Provider = new Web3(Web3.givenProvider);
 }
 web3js = new Web3(web3Provider);//web3js就是你需要的web3实例
+
 //web3js = new Web3(new Web3.providers.HttpProvider("HTTP://127.0.0.1:7545")); 
 
 /*
@@ -32,6 +34,7 @@ const Web3 = require('web3');
 
 let web3js = new Web3(Web3.givenProvider);
 */
+
 /*获取地址方法*/
 web3js.eth.getAccounts(function (error, result) {
 	/*if (error){

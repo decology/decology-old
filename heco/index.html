@@ -148,9 +148,9 @@
 						<div class="modal-body">
 							<!-- 规则内容 -->
 							<div class="row"style="width:92%;margin-left:14px;border-radius:10px;">					
-								1、流程：通过特邀链接激活-获取白名单。
+								1、流程：通过特邀链接激活-获取白名单。（暂停添加新白名单，已有不变）
 								2、初级空投、中级空投每24小时可以领取一次。
-								3、邀请奖励:一级8%，二级5%，
+								3、邀请奖励:一级8%，二级5%。(暂停邀请开通，已有关系不变)
 								DSME合约地址:<br>0xdc38a8732f236e8F3E993775F0a68b7126a67e3C
 							</div>
 						</div>
@@ -458,10 +458,10 @@
 			
             bootbox.alert({
 				size: "small",
-				title: "社区公告",
-				message: "亲爱的社区朋友，你们好！在这里我们做个重要通知:我们的官方邮件已更改为admin@dsme.space，旧的邮箱地址即将彻底停用，所以如果有任何疑问请与我们的新邮箱沟通，期待来信！🤗",
+				title: "2023/7.14社区公告",
+				message: "亲爱的社区朋友，你们好！我们已于2023/7/14日升级了公共节点，并优化了连接WEB3的标准，解决了公共节点访问失败问题。我们的社区邮件为admin@dsme.space，如果有任何疑问请邮箱沟通，期待来信！🤗",
 			})
-
+			
             test_system1 = test_system2;
 			test = test_system4;
 
@@ -478,12 +478,12 @@
 			KC_heco.methods.random().call().then(function(res){
 				//初级空投conflux领取人次
 				kongtouR.random().call({from:"0x1a781152365291daa5e06617e59019c7d7c8cc6b"}).then(function(response){
-					$("#chu_all").html( BigInt(response[0]) + res );
+					$("#chu_all").html( Number(response[0]) + Number(res) );
 				})
 			})
 			//中级空投领取人次
 			KZ_heco.methods.random().call().then(function(response){
-				$("#zhong_all").html( response + BigInt(1845) );
+				$("#zhong_all").html( Number(response)/2 + 1845.5);
 			})
 			
 			//DBTC-lp质押总量与质押年华率
@@ -501,77 +501,84 @@
 				})
 			})
 			//获取账户地址
-            web3js.eth.getAccounts(function(error,result){
-
+            //web3js.eth.getAccounts(function(error,result){
+			window.ethereum.enable()
+				.then(() => {
+				// 获取钱包账户地址
+				return web3js.eth.getAccounts();
+				})
+				.then((accounts) => {
+				const result = accounts;
+				//console.log('Connected to MetaMask with account:', result[0]);
+				// 在这里可以继续执行您的代码逻辑，与钱包进行交互等
+							
 				//防止API获取失败，再次获取
 				//初级空投heco领取人次
 				kongtou_chuji.methods.random().call().then(function(res){
 					//初级空投conflux领取人次
 					kongtouR.random().call({from:"0x1a781152365291daa5e06617e59019c7d7c8cc6b"}).then(function(response){
-						$("#chu_all").html( response[0]/1 + res/1 );
+						$("#chu_all").html( Number(response[0])/1 + Number(res)/1 );
 					})
 				})
 				//中级空投领取人次
 				test_kongtou.methods.random().call().then(function(response){
-					$("#zhong_all").html( response/2 + 1845.5 );
+					$("#zhong_all").html( Number(response)/2 + 1845.5 );
 				})
 				
 				//DBTC-lp质押总量与质押年华率
 				dspool_dbtc.methods.pledge_all().call().then(function(res){
 					dspool_dbtc.methods.reward_day().call().then(function(rr){
-						$("#lpAll").html(toDecimal4(res/ 10**18));
-						$("#lpApy").html(toDecimal2((rr*0.5*36500*2)/(res*108000)) + "%" );	
+						$("#lpAll").html(toDecimal4(Number(res)/ 10**18));
+						$("#lpApy").html(toDecimal2((Number(rr)*0.5*36500*2)/(Number(res)*108000)) + "%" );	
 					})
 				})
 				//DSME-lp质押总量与质押年华率
 				test_dspool2.methods.pledge_all().call().then(function(res){
 					test_dspool2.methods.reward_day().call().then(function(rr){
-						$("#lpAll2").html(toDecimal4(res/ 10**18));
-						$("#lpApy2").html(toDecimal2((rr*36500*3)/(res)) + "%" );	
+						$("#lpAll2").html(toDecimal4(Number(res)/ 10**18));
+						$("#lpApy2").html(toDecimal2((Number(rr)*36500*3)/(Number(res))) + "%" );	
 					})
 				})
 
-
-
 				//查询DSME数量
                 coin_balance.methods.requrie_banlance("0xdc38a8732f236e8f3e993775f0a68b7126a67e3c").call({from:result[0]}).then(function(resu){
-					$("#dsmeBanlance").html(toDecimal2(resu/10**18));
-					$("#dsmeBanlance2").html(toDecimal2(resu/10**18));
+					$("#dsmeBanlance").html(toDecimal2(Number(resu)/10**18));
+					$("#dsmeBanlance2").html(toDecimal2(Number(resu)/10**18));
 				})
 				//查询DBTC持币数量
                 coin_balance.methods.requrie_banlance("0x69235b15Df012EE671467aaF81b676Cf0628F927").call({from:result[0]}).then(function(resu){
-					$("#cfxfcBanlance").html(toDecimal4(resu/10**18));
+					$("#cfxfcBanlance").html(toDecimal4(Number(resu)/10**18));
 				})
 				//查询质押DBTC数量
                 coin_balance.methods.requrie_banlance("0x0fea739de3B4fd3D21eCa5A011a4e96bB9f4919b").call({from:result[0]}).then(function(resu){
-					$("#dcflBanlance").html(toDecimal4(resu/10**18));
+					$("#dcflBanlance").html(toDecimal4(Number(resu)/10**18));
 					//刷新收益
 					if(resu > 0){
 						//DSPOOL-DBTC收益
 						test_dspool.methods.calculation().call({from:result[0]}).then(function(re){
-							$("#lpShouyi").html(toDecimal8(re/10**18));
+							$("#lpShouyi").html(toDecimal8(Number(re)/10**18));
 						})
 						var accountInterval = setInterval(function() {
 							//DSPOOL-DBTC收益
 							test_dspool.methods.calculation().call({from:result[0]}).then(function(re){
-								$("#lpShouyi").html(toDecimal8(re/10**18));
+								$("#lpShouyi").html(toDecimal8(Number(re)/10**18));
 							})
 						}, 3000);
 					}
 				})
 				//查询质押DSME数量
                 coin_balance.methods.requrie_banlance("0x5413f42064ed7beb1f50d368df6b85d63873f525").call({from:result[0]}).then(function(resu){
-					$("#dcflBanlance2").html(toDecimal4(resu/10**18));
+					$("#dcflBanlance2").html(toDecimal4(Number(resu)/10**18));
 					//刷新收益
 					if(resu > 0){
 						//DSPOOL-DSME收益
 						test_dspool2.methods.calculation().call({from:result[0]}).then(function(re){
-							$("#lpShouyi2").html(toDecimal8(re/10**18));
+							$("#lpShouyi2").html(toDecimal8(Number(re)/10**18));
 						})
 						var accountInterval = setInterval(function() {
 							//DSPOOL-DSME收益
 							test_dspool2.methods.calculation().call({from:result[0]}).then(function(re){
-								$("#lpShouyi2").html(toDecimal8(re/10**18));
+								$("#lpShouyi2").html(toDecimal8(Number(re)/10**18));
 							})
 						}, 3000);
 					}
@@ -582,11 +589,11 @@
 				
 				//空投个人领取次数
                 test_kongtou.methods.playmap(result[0]).call().then(function(result) {
-						$("#zhong_ge").html( result[1] );		
+						$("#zhong_ge").html( Number(result[1]) );		
 				});
 				
 				kongtou_chuji.methods.playmap(result[0]).call().then(function(result) {
-						$("#chu_ge").html( result[1] );		
+						$("#chu_ge").html( Number(result[1]) );		
 				});
 				/*
 				//BUFF
@@ -648,9 +655,9 @@
                 //中级签到空投
 				button_zhongji.onclick = function() {
 					test_kongtou.methods.playmap(result[0]).call().then(function(resul) {
-						if (resul[1] != 0) {
+						if (Number(resul[1]) != 0) {
 							test_kongtou.methods.playmap(result[0]).call().then(function(resu) {
-								if (new Date().getTime() / 1000 - resu[0] >= 86400) {
+								if (new Date().getTime() / 1000 - Number(resu[0]) >= 86400) {
 									bootbox.prompt({ 
     									size: "small",
     									title: "请填写随机整数（0~20），猜中空投翻倍~",
@@ -659,20 +666,20 @@
 												re1 = re.toString();
 												test_kongtou.methods.sign(re1).send({from: result[0],gas: 400000}).then(function(rr){
 													test_kongtou.methods.playmapping(result[0]).call().then(function(response){
-														if(response[1] == re1){
+														if(Number(response[1]) == re1){
 															bootbox.alert({
 																size: "small",
 																title: "空投提示",
-																message:"恭喜您领取成功，本次空投公共基础系数Abs：" + response[0]/10 + ",空投随机系数N：" + response[3]/10 +  
-																",竞猜随机数M：" + response[1] + ",等级加成Ls：" + response[4] + "%,本次您已中奖，空投翻倍，共获得奖励 = Abs * N * 2 *(1+Ls) = " + response[2]/10**18 + " DSME" ,
+																message:"恭喜您领取成功，本次空投公共基础系数Abs：" + Number(response[0])/10 + ",空投随机系数N：" + Number(response[3])/10 +  
+																",竞猜随机数M：" + Number(response[1]) + ",等级加成Ls：" + Number(response[4]) + "%,本次您已中奖，空投翻倍，共获得奖励 = Abs * N * 2 *(1+Ls) = " + Number(response[2])/10**18 + " DSME" ,
 																callback:function(){}
 															})
 														}else{
 															bootbox.alert({
 																size: "small",
 																title: "空投提示",
-																message:"恭喜您领取成功，本次空投公共基础系数Abs：" + response[0]/10 + ",空投随机系数N：" + response[3]/10 +
-																",竞猜随机数M：" + response[1] + ",等级加成Ls：" + response[4] + "%,本次您未中奖，共获得奖励 = Abs * N *(1+Ls) = " + response[2]/10**18 + " DSME" ,
+																message:"恭喜您领取成功，本次空投公共基础系数Abs：" + Number(response[0])/10 + ",空投随机系数N：" + Number(response[3])/10 +
+																",竞猜随机数M：" + Number(response[1]) + ",等级加成Ls：" + Number(response[4]) + "%,本次您未中奖，共获得奖励 = Abs * N *(1+Ls) = " + Number(response[2])/10**18 + " DSME" ,
 																callback:function(){}
 															})
 														}
@@ -737,16 +744,16 @@
 				//初级空投领取
 				button_chuji.onclick = function(){
 					test.methods.playerMap(result[0]).call().then(function(resul) {
-						if (resul > 1070) {
+						if (Number(resul) > 1070) {
 							kongtou_chuji.methods.playmap(result[0]).call().then(function(resu) {
-								if (new Date().getTime() / 1000 - resu[0] >= 86400 * 2) {											
+								if (new Date().getTime() / 1000 - Number(resu[0]) >= 86400 * 2) {											
 									kongtou_chuji.methods.sign().send({from: result[0],gas: 330000}).then(function(){
 										kongtou_chuji.methods.playmapping(result[0]).call().then(function(response){
 											bootbox.alert({
 												size: "small",
 												title: "空投提示",
-												message:"恭喜您领取成功，本次空投公共基础系数Abs：" + response[0]/10 + ",空投随机系数N：" + response[3]/10 +
-												",等级加成Ls：" + response[4] + "%,共获得奖励 = Abs * N *(1+Ls) = " + response[2]/10**18 + " DSME" ,
+												message:"恭喜您领取成功，本次空投公共基础系数Abs：" + Number(response[0])/10 + ",空投随机系数N：" + Number(response[3])/10 +
+												",等级加成Ls：" + Number(response[4]) + "%,共获得奖励 = Abs * N *(1+Ls) = " + Number(response[2])/10**18 + " DSME" ,
 												callback:function(){}
 											})
 										})
@@ -762,8 +769,8 @@
 									bootbox.alert({
 										size: "small",
 										title: "空投提示",
-										message: "<p>上次领取时间：" + getLocalTime(resu[
-												0]) +
+										message: "<p>上次领取时间：" + getLocalTime(Number(resu[
+												0])) +
 											",</p><p> 还未到领取时间哦</p>",
 									})
 								}

@@ -148,11 +148,11 @@
 						<div class="modal-body">
 							<!-- 规则内容 -->
 							<div class="row"style="width:92%;margin-left:14px;border-radius:10px;">					
-								1、流程：通过特邀链接激活-加入微信群-发送钱包地址等待添加白名。
+								1、流程：链接激活-加入微信群-发送钱包地址。（暂停添加新白名单，已有不变）
 								2、初级空投、中级空投每24小时可以领取一次。
 								3、中级空投C链暂未开放。
 								4、每次0.04-0.12cDSME。
-								5、邀请奖励:一级50%，二级20%，邀请链接联系微信获取。
+								5、邀请奖励:一级8%，二级5%(暂停邀请开通，已有关系不变)
 								cDSME合约地址:<br>cfx:acayf79s2bdjn8hhrjkj4g2j75e44y9rja1prjy0a9。
 							</div>
 						</div>
@@ -340,8 +340,8 @@
             
             bootbox.alert({
 				size: "small",
-				title: "社区公告",
-				message: "亲爱的社区朋友，你们好！在这里我们做个重要通知:我们的官方邮件已更改为admin@dsme.space，旧的邮箱地址即将彻底停用，所以如果有任何疑问请与我们的新邮箱沟通，期待来信！🤗",
+				title: "2023/7.14社区公告",
+				message: "亲爱的社区朋友，你们好！我们已于2023/7/14日升级了公共节点，并优化了连接WEB3的标准，解决了公共节点访问失败问题。我们的社区邮件为admin@dsme.space，如果有任何疑问请邮箱沟通，期待来信！🤗",
 			})
 										
 			//公共数据RPC节点获取
@@ -462,7 +462,6 @@
 				system.playerMap(accounts[0]).call({from:accounts[0]}).then(function(resul) {
 					system.playersMap(resul).call({from:accounts[0]}).then(function(resu) {
 						//$("#sys_level").html("生态等级：" + resu[3]);
-						console.log(resu[3][0])
 						switch(resu[3][0]){
 							case 0:$("#lpBuff").html("0" );break;
 							case 1:$("#lpBuff").html("1" );break;
