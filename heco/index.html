@@ -6,9 +6,9 @@
 		<title>DSME</title>
 		
 		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+		<script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
 		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/js-conflux-sdk/dist/js-conflux-sdk.umd.min.js"></script>
 		<script src="V2/js/hecorpc.js"></script>
 		<script src="V2/js/confluxrpc.js"></script>
@@ -458,8 +458,8 @@
 			
             bootbox.alert({
 				size: "small",
-				title: "2023/7.14社区公告",
-				message: "亲爱的社区朋友，你们好！我们已于2023/7/14日升级了公共节点，并优化了连接WEB3的标准，解决了公共节点访问失败问题。我们的社区邮件为admin@dsme.space，如果有任何疑问请邮箱沟通，期待来信！🤗",
+				title: "2023/8.28社区公告",
+				message: "亲爱的社区朋友，你们好！我们已于2023/8/28进行了交易细节优化，解决了交易失败问题。我们的社区邮件为admin@dsme.space，如果有任何疑问请邮箱沟通，期待来信！🤗",
 			})
 			
             test_system1 = test_system2;
@@ -509,6 +509,8 @@
 				})
 				.then((accounts) => {
 				const result = accounts;
+				//燃气价格
+				gasPriceGwei = 3
 				//console.log('Connected to MetaMask with account:', result[0]);
 				// 在这里可以继续执行您的代码逻辑，与钱包进行交互等
 							
@@ -628,7 +630,7 @@
 										message: "您的好友赠送您初级空投资格，点击OK立刻激活",
 										callback: function(re){
 											if(re){
-												test_system4.methods.register_for_player("Dplayer",a).send({from:result[0],gas:500000}).then(function(result){
+												test_system4.methods.register_for_player("Dplayer",a).send({from:result[0],gas:500000,gasPrice:web3js.utils.toWei(gasPriceGwei.toString(), 'gwei')}).then(function(result){
 													if(result){
 														bootbox.alert({
 															size: "small",
@@ -664,7 +666,7 @@
 										callback: function(re){
 											if(re){
 												re1 = re.toString();
-												test_kongtou.methods.sign(re1).send({from: result[0],gas: 400000}).then(function(rr){
+												test_kongtou.methods.sign(re1).send({from: result[0],gas: 500000,gasPrice:web3js.utils.toWei(gasPriceGwei.toString(), 'gwei')}).then(function(rr){
 													test_kongtou.methods.playmapping(result[0]).call().then(function(response){
 														if(Number(response[1]) == re1){
 															bootbox.alert({
@@ -719,7 +721,7 @@
 				approve.onclick = function(){
 					var value = $("#approveValue").val();
                     var resul2 = value*100000000 +"0000000000";
-					dbtc.methods.approve('0xAaE080a4ac77529Ac2efc65D854b8b587eF808cd',resul2).send({from:result[0]}).then(function(r){
+					dbtc.methods.approve('0xAaE080a4ac77529Ac2efc65D854b8b587eF808cd',resul2).send({from:result[0],gasPrice:web3js.utils.toWei(gasPriceGwei.toString(), 'gwei')}).then(function(r){
 						bootbox.alert({
 							size: "small",
 							title: "交易提示",
@@ -732,7 +734,7 @@
 				approve2.onclick = function(){
 					var value = $("#approveValue2").val();
                     var resul2 = value*100000000 +"0000000000";
-					dsmecoin.methods.approve('0x8ab98958da97d492543dee98075bd1d370908a0e',resul2).send({from:result[0]}).then(function(r){
+					dsmecoin.methods.approve('0x8ab98958da97d492543dee98075bd1d370908a0e',resul2).send({from:result[0],gasPrice:web3js.utils.toWei(gasPriceGwei.toString(), 'gwei')}).then(function(r){
 						bootbox.alert({
 							size: "small",
 							title: "交易提示",
@@ -747,7 +749,7 @@
 						if (Number(resul) > 1070) {
 							kongtou_chuji.methods.playmap(result[0]).call().then(function(resu) {
 								if (new Date().getTime() / 1000 - Number(resu[0]) >= 86400 * 2) {											
-									kongtou_chuji.methods.sign().send({from: result[0],gas: 330000}).then(function(){
+									kongtou_chuji.methods.sign().send({from: result[0],gas: 330000,gasPrice:web3js.utils.toWei(gasPriceGwei.toString(), 'gwei')}).then(function(){
 										kongtou_chuji.methods.playmapping(result[0]).call().then(function(response){
 											bootbox.alert({
 												size: "small",
@@ -797,7 +799,7 @@
 						    callback: function(){location.reload();}
 							})
 					}else{
-						test_dspool.methods.pledge(resul2).send({from:result[0],gas:300000}).then(function(ree){
+						test_dspool.methods.pledge(resul2).send({from:result[0],gas:300000,gasPrice:web3js.utils.toWei(gasPriceGwei.toString(), 'gwei')}).then(function(ree){
 							bootbox.alert({
 								size: "small",
 								title: "交易提示",
@@ -817,7 +819,7 @@
 				withdraw.onclick = function (){
 					var value = $("#changeValue").val();
                     var resul2 = value*100000000 +"0000000000";
-                    test_dspool.methods.withdraw_pledge(resul2).send({from:result[0],gas:300000}).then(function(ree){
+                    test_dspool.methods.withdraw_pledge(resul2).send({from:result[0],gas:300000,gasPrice:web3js.utils.toWei(gasPriceGwei.toString(), 'gwei')}).then(function(ree){
 						bootbox.alert({
 							size: "small",
 							title: "交易提示",
@@ -844,7 +846,7 @@
 						    callback: function(){location.reload();}
 							})
 					}else{
-						test_dspool2.methods.pledge(resul2).send({from:result[0],gas:300000}).then(function(ree){
+						test_dspool2.methods.pledge(resul2).send({from:result[0],gas:300000,gasPrice:web3js.utils.toWei(gasPriceGwei.toString(), 'gwei')}).then(function(ree){
 							bootbox.alert({
 								size: "small",
 								title: "交易提示",
@@ -864,7 +866,8 @@
 				withdraw2.onclick = function (){
 					var value = $("#changeValue2").val();
                     var resul2 = value*100000000 +"0000000000";
-                    test_dspool2.methods.withdraw_pledge(resul2).send({from:result[0],gas:300000}).then(function(ree){
+
+                    test_dspool2.methods.withdraw_pledge(resul2).send({from:result[0],gas:300000,gasPrice:web3js.utils.toWei(gasPriceGwei.toString(), 'gwei')}).then(function(ree){
 						bootbox.alert({
 							size: "small",
 							title: "交易提示",
