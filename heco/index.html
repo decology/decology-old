@@ -799,7 +799,7 @@
 						    callback: function(){location.reload();}
 							})
 					}else{
-						test_dspool.methods.pledge(resul2).send({from:result[0],gas:300000,gasPrice:web3js.utils.toWei(gasPriceGwei.toString(), 'gwei')}).then(function(ree){
+						test_dspool.methods.pledge(resul2).send({from:result[0],gas:500000,gasPrice:web3js.utils.toWei(gasPriceGwei.toString(), 'gwei')}).then(function(ree){
 							bootbox.alert({
 								size: "small",
 								title: "交易提示",
@@ -819,7 +819,7 @@
 				withdraw.onclick = function (){
 					var value = $("#changeValue").val();
                     var resul2 = value*100000000 +"0000000000";
-                    test_dspool.methods.withdraw_pledge(resul2).send({from:result[0],gas:300000,gasPrice:web3js.utils.toWei(gasPriceGwei.toString(), 'gwei')}).then(function(ree){
+                    test_dspool.methods.withdraw_pledge(resul2).send({from:result[0],gas:500000,gasPrice:web3js.utils.toWei(gasPriceGwei.toString(), 'gwei')}).then(function(ree){
 						bootbox.alert({
 							size: "small",
 							title: "交易提示",
@@ -846,7 +846,7 @@
 						    callback: function(){location.reload();}
 							})
 					}else{
-						test_dspool2.methods.pledge(resul2).send({from:result[0],gas:300000,gasPrice:web3js.utils.toWei(gasPriceGwei.toString(), 'gwei')}).then(function(ree){
+						test_dspool2.methods.pledge(resul2).send({from:result[0],gas:500000,gasPrice:web3js.utils.toWei(gasPriceGwei.toString(), 'gwei')}).then(function(ree){
 							bootbox.alert({
 								size: "small",
 								title: "交易提示",
@@ -867,7 +867,7 @@
 					var value = $("#changeValue2").val();
                     var resul2 = value*100000000 +"0000000000";
 
-                    test_dspool2.methods.withdraw_pledge(resul2).send({from:result[0],gas:300000,gasPrice:web3js.utils.toWei(gasPriceGwei.toString(), 'gwei')}).then(function(ree){
+                    test_dspool2.methods.withdraw_pledge(resul2).send({from:result[0],gas:500000,gasPrice:web3js.utils.toWei(gasPriceGwei.toString(), 'gwei')}).then(function(ree){
 						bootbox.alert({
 							size: "small",
 							title: "交易提示",
